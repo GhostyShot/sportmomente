@@ -1,63 +1,88 @@
-# SPORTMOMENTE
+# SPORTMOMENTE 🏆
 
-> Bildgalerie für Handball, Fußball & Sport
-> Live: [sportmomente.paulfaller.me](https://sportmomente.paulfaller.me)
+> Professionelle Bildgalerie-Website für Sport-Events — mit verstecktem Admin-Panel, Kollektions-Passwörtern, Share-Links und cineastischen Animationen.
 
-## Features
-
-### Public
-- Cinematic page loader with staggered bar reveal
-- Particle canvas hero
-- 3D magnetic tilt on collection cards
-- Text scramble animation on gallery open
-- Accordion photo strip
-- Per-collection share links
-- Live search across galleries, authors, categories
-- Lightbox with keyboard & swipe navigation
-- Responsive: full desktop experience + mobile-optimized build
-
-### Admin (hidden)
-- Trigger: **triple-click `· · ·`** in footer
-- Password hashed with SHA-256 via `SubtleCrypto` — never stored in plaintext
-- Rate-limited login: 5 attempts → 30s lockout
-- Create / edit / delete collections
-- Metadata per collection: title, author, date, location, category, description
-- **Optional password protection per collection** (independently hashed)
-- LocalStorage persistence across sessions
-
-## Security
-- Admin password: SHA-256 hashed client-side via SubtleCrypto
-- 5 login attempts max, then 30s cooldown
-- Admin trigger invisible — no href, no visible button
-- Collection passwords independently hashed (SHA-256)
-- Content-Security-Policy headers via vercel.json
-- Security headers: X-Frame-Options DENY, X-Content-Type-Options, etc.
-
-## Deploy
-
-1. Import `GhostyShot/sportmomente` to Vercel
-2. Deploy as static site (no build step needed)
-3. DNS: `CNAME sportmomente → cname.vercel-dns.com`
-4. Vercel → Domains → add `sportmomente.paulfaller.me`
-
-## Change Admin Password
-
-```js
-// Run in browser console on the site:
-hashPassword('your-new-password').then(h => console.log(h))
-// Copy the output and replace PASS_HASH in index.html
-```
-
-## File Structure
-
-```
-sportmomente/
-├── index.html      # Main app (desktop-first, responsive)
-├── vercel.json     # Security headers + routing
-├── manifest.json   # PWA manifest
-└── README.md
-```
+**Live:** [sportmomente.paulfaller.me](https://sportmomente.paulfaller.me)
 
 ---
 
-© 2026 Paul Faller — sportmomente.paulfaller.me
+## Features
+
+### Öffentliche Website
+- 🎬 **Cinematic Loader** — animierter Balkenprojektions-Effekt beim Laden
+- ✨ **Particle Canvas** — leuchtende Hintergrund-Partikel im Hero (Desktop)
+- 🃏 **3D-Tilt-Karten** — Galerie-Karten reagieren auf Mausbewegung
+- 🔤 **Text-Scramble** — Titel scramble beim Öffnen einer Galerie
+- 📜 **Parallax + Scroll-Reveals** — Hero und Sections
+- 🔗 **Share-Links** — jede Galerie hat einen eigenen, kopierbaren Link
+- 🔒 **Collection-Passwörter** — optionaler Passwortschutz pro Galerie
+- 🔍 **Live-Suche** — Filter nach Name, Autor, Kategorie
+
+### Admin-Panel (versteckt)
+- 🙈 **Versteckter Zugang** — 3× auf `· · ·` im Footer klicken
+- 🔐 **SHA-256 gehashte Passwörter** — kein Klartext (WebCrypto API)
+- 🚦 **Rate Limiting** — max. 5 Loginversuche / 5 Minuten
+- 📁 **Galerien verwalten** — erstellen, bearbeiten, löschen
+- 🔑 **Kollektions-Passwörter setzen** — pro Galerie
+- 💾 **Persistenz** — localStorage mit Versionierung
+- 📊 **Statistiken** — Bilder, Galerien, gesperrte Kollektionen
+
+### Mobile-Version
+- 📱 **Touch-first** — Bottom Navigation, große Tap-Targets
+- 👆 **Swipe im Lightbox** — Links/Rechts wischen
+- 📋 **Bottom Sheets** — natives iOS/Android-Feeling
+- 🔒 **Safe-Area-Insets** — iPhone Notch & Home Bar
+- 🚀 **Performance** — keine schweren Animationen, optimiert
+
+---
+
+## Deployment auf `sportmomente.paulfaller.me`
+
+### Vercel (empfohlen)
+
+```bash
+# 1. In Vercel importieren
+# → vercel.com/new → GitHub Repo "GhostyShot/sportmomente"
+# → Framework: Other (statische Files)
+# → Root: /
+
+# 2. Domain verbinden
+# Vercel: Settings → Domains → sportmomente.paulfaller.me
+# DNS: CNAME sportmomente → cname.vercel-dns.com
+```
+
+### DNS-Eintrag
+
+| Typ | Name | Wert |
+|-----|------|------|
+| CNAME | sportmomente | cname.vercel-dns.com |
+
+---
+
+## Dateistruktur
+
+```
+sportmomente/
+├── index.html      # Desktop-Version
+├── mobile.html     # Mobile-Version
+├── 404.html        # Custom 404
+├── js/
+│   └── core.js     # Security, Storage, Utilities
+├── vercel.json     # Deployment + Security Headers
+└── _headers        # Netlify Security Headers
+```
+
+## Sicherheit
+
+| Bereich | Maßnahme |
+|---------|----------|
+| Admin-Passwort | SHA-256 + Salt (WebCrypto) |
+| Kollektion-PW | SHA-256 + Salt + Collection-ID |
+| Brute Force | Rate Limit 5/5min |
+| Admin-Zugang | Versteckt (kein Button) |
+| Input | HTML-Escape + MaxLength |
+| Headers | CSP, X-Frame-Options, nosniff |
+
+---
+
+© 2026 Sportmomente | Paul Faller
