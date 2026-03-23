@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Sportmomente — Bildgalerien für Handball, Fußball & Sport.">
+<meta name="theme-color" content="#060608">
+<meta property="og:title" content="SPORTMOMENTE">
+<meta property="og:description" content="Atemberaubende Bilder eurer Spiele, Turniere und unvergesslichen Momente.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sportmomente.paulfaller.me">
+<title>SPORTMOMENTE</title>
+<style>
+  html,body{margin:0;padding:0;background:#060608;color:#f2efe9;font-family:'DM Sans',sans-serif;height:100%}
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh}
+  .splash{text-align:center}
+  .splash-logo{font-family:'Bebas Neue',cursive;font-size:48px;letter-spacing:6px}
+  .splash-logo b{color:#e8ff4a;font-weight:400}
+  .splash-sub{font-size:12px;color:#666;letter-spacing:2px;margin-top:8px}
+  .splash-bar{width:120px;height:1px;background:rgba(255,255,255,.08);margin:20px auto 0;overflow:hidden}
+  .splash-fill{height:100%;background:#e8ff4a;animation:fill .8s ease forwards}
+  @keyframes fill{to{width:100%}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="splash">
+  <div class="splash-logo">SPORT<b>MOMENTE</b></div>
+  <div class="splash-sub">WIRD GELADEN…</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
+</div>
+<script>
+(function(){
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || (navigator.maxTouchPoints > 1 && window.innerWidth < 1024);
+  var hash = window.location.hash;
+  if(hash === '#desktop') isMobile = false;
+  if(hash === '#mobile') isMobile = true;
+  var target = isMobile ? 'mobile.html' : 'desktop.html';
+  var search = window.location.search || '';
+  setTimeout(function(){
+    window.location.replace(target + search + (hash && hash !== '#desktop' && hash !== '#mobile' ? hash : ''));
+  }, 600);
+})();
+</script>
+</body>
+</html>
